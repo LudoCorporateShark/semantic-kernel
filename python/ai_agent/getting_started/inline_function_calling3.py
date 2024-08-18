@@ -20,7 +20,8 @@ kernel.add_service(
 )
 
 # Define the request settings
-req_settings = kernel.get_prompt_execution_settings_from_service_id(service_id)
+# # get_prompt_execution_settings_from_service_id as oppose to OpenAIChatPromptExecutionSettings class, it execute one function at the time
+req_settings = kernel.get_prompt_execution_settings_from_service_id(service_id)  # as op
 req_settings.max_tokens = 2000
 req_settings.temperature = 0.7
 req_settings.top_p = 0
