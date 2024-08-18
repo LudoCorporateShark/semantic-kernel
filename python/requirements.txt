@@ -1,0 +1,16 @@
+poetry
+pandas
+asyncio
+json
+logging
+service==0.6.0
+services
+azure-cli
+azure-ai-formrecognizer==3.3.0
+azure-search-documents
+azure-identity
+python-dotenv
+semantic-kernel==0.9.2b1
+promptflow
+promptflow[azure]
+promptflow-tools
