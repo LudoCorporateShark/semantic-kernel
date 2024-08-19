@@ -16,17 +16,19 @@ from semantic_kernel.connectors.ai.open_ai import (
 )
 from semantic_kernel.contents import (
     ChatHistory,
+    # AuthorRole,
+    # ImageContent,
+    # FinishReason
 )
 
-# AuthorRole,
-# ImageContent,
-# FinishReason
+
 from semantic_kernel.functions import (
     KernelArguments,
+    # FunctionResult,
+    # KernelFunctionFromMethod,
 )
 
-# FunctionResult,
-# KernelFunctionFromMethod,
+
 from semantic_kernel.prompt_template import InputVariable, PromptTemplateConfig
 
 # Create a service instance
@@ -125,12 +127,6 @@ async def main():
         return_plugin=False,  # switch between plugin (T) and function (F)
         description="Example of chatbot function",
         # fully_qualified_name="dataAnalysisChatPlugin-dataAnalysisChatFunc",  # plugin_name-function_name
-    )
-
-    # Create a chat history volatile instance
-    chat_history = ChatHistory()
-    chat_history.add_system_message(
-        "You are a helpful chatbot who is good about giving book recommendations."
     )
 
     # Initialising the Kernel argument

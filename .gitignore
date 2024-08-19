@@ -493,3 +493,4 @@ swa-cli.config.json
 
 # python devcontainer
 /python/.devcontainer/*
+python/ai_agent/getting_started/sequential_planner_custom_email.py

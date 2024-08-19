@@ -21,17 +21,12 @@ from semantic_kernel.core_plugins import (
     # SessionsPythonTool,
     # TextMemoryPlugin,     # Semantic Text Memory: RECALL, SAVE
     TextPlugin,  # provides a set of functions to manipulate strings
+    # TimePlugin,
+    # WebSearchEnginePlugin,    # provides web search engine functionality
 )
-
-# AuthorRole,
-# ImageContent,
-# FinishReason
 from semantic_kernel.functions import (
     KernelFunctionFromPrompt,
 )
-
-# TimePlugin,
-# WebSearchEnginePlugin,    # provides web search engine functionality
 from semantic_kernel.planners import (
     SequentialPlanner,  # execute a single call to generate a plan that is meant to be saved before continuing operations; XML-based step-by-step planner
 )
