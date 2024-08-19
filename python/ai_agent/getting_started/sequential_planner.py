@@ -10,28 +10,10 @@ import asyncio
 from samples.getting_started.services import Service
 from samples.service_settings import ServiceSettings
 from semantic_kernel import Kernel
-
-
 from semantic_kernel.connectors.ai.open_ai import (
     AzureChatPromptExecutionSettings,
     OpenAIChatPromptExecutionSettings,
 )
-from semantic_kernel.contents import (
-    ChatHistory,
-    # AuthorRole,
-    # ImageContent,
-    # FinishReason
-)
-
-from semantic_kernel.functions import (
-    KernelArguments,
-    # FunctionResult,
-    # KernelFunctionFromMethod,
-    KernelFunctionFromPrompt,
-)
-
-from semantic_kernel.prompt_template import InputVariable, PromptTemplateConfig
-
 from semantic_kernel.core_plugins import (
     # ConversationSummaryPlugin,    # Semantic plugin that enables conversations summarization.
     # HttpPlugin,   # A plugin that provides HTTP functionality: GET, POST, DELETE, PUT
@@ -39,15 +21,20 @@ from semantic_kernel.core_plugins import (
     # SessionsPythonTool,
     # TextMemoryPlugin,     # Semantic Text Memory: RECALL, SAVE
     TextPlugin,  # provides a set of functions to manipulate strings
-    # TimePlugin,
-    # WebSearchEnginePlugin,    # provides web search engine functionality
 )
 
+# AuthorRole,
+# ImageContent,
+# FinishReason
+from semantic_kernel.functions import (
+    KernelFunctionFromPrompt,
+)
+
+# TimePlugin,
+# WebSearchEnginePlugin,    # provides web search engine functionality
 from semantic_kernel.planners import (
-    SequentialPlanner,  #   execute a single call to generate a plan that is meant to be saved before continuing operations; XML-based step-by-step planner
-    # FunctionCallingStepwisePlanner,  # Perform the next step of the plan if there is more work to do. Here the model can execute many function call as part of his reasoning
+    SequentialPlanner,  # execute a single call to generate a plan that is meant to be saved before continuing operations; XML-based step-by-step planner
 )
-
 
 # Create a service instance
 service_settings = ServiceSettings.create()

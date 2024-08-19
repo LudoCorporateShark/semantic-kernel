@@ -10,25 +10,23 @@ import asyncio
 from samples.getting_started.services import Service
 from samples.service_settings import ServiceSettings
 from semantic_kernel import Kernel
-
-
 from semantic_kernel.connectors.ai.open_ai import (
     AzureChatPromptExecutionSettings,
     OpenAIChatPromptExecutionSettings,
 )
 from semantic_kernel.contents import (
     ChatHistory,
-    # AuthorRole,
-    # ImageContent,
-    # FinishReason
 )
 
+# AuthorRole,
+# ImageContent,
+# FinishReason
 from semantic_kernel.functions import (
     KernelArguments,
-    # FunctionResult,
-    # KernelFunctionFromMethod,
 )
 
+# FunctionResult,
+# KernelFunctionFromMethod,
 from semantic_kernel.prompt_template import InputVariable, PromptTemplateConfig
 
 # Create a service instance
