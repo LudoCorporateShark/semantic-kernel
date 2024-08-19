@@ -6,84 +6,87 @@ grandparent_dir = r"D:\\CodeBase Docs\\New folder\\semantic-kernel\\python"
 sys.path.append(grandparent_dir)
 
 import asyncio
+
 from samples.getting_started.services import Service
 from samples.service_settings import ServiceSettings
 from semantic_kernel import Kernel
-from semantic_kernel.contents import (
-    ChatHistory,
-    # AuthorRole,
-    # ImageContent,
-    # FinishReason
-)
-from semantic_kernel.functions import (
-    KernelArguments,
-    # FunctionResult,
-    # KernelFunctionFromMethod,
-)
+
+# FunctionResult,
+# KernelFunctionFromMethod,
 from semantic_kernel.connectors.ai.open_ai import (
     AzureChatPromptExecutionSettings,
     OpenAIChatPromptExecutionSettings,
 )
-from semantic_kernel.prompt_template import InputVariable, PromptTemplateConfig
-
-
-# Create a service instance
-service_settings = ServiceSettings.create()
-
-# Select a service to use for this notebook (available services: OpenAI, AzureOpenAI, HuggingFace)
-selectedService = (
-    Service.AzureOpenAI
-    if service_settings.global_llm_service is None
-    else Service(service_settings.global_llm_service.lower())
+from semantic_kernel.contents import (
+    ChatHistory,
 )
-print(f"Using service type: {selectedService}")
 
-# Initialise Kernel
-kernel = Kernel()
-
-service_id = None
-# service_id = "AzureOpenAI"  # "default"
-if selectedService == Service.OpenAI:
-    from semantic_kernel.connectors.ai.open_ai import OpenAIChatCompletion
-
-    service_id = "default"
-    kernel.add_service(
-        OpenAIChatCompletion(
-            service_id=service_id,
-        ),
-    )
-elif selectedService == Service.AzureOpenAI:
-    from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
-
-    service_id = "default"
-    kernel.add_service(
-        AzureChatCompletion(
-            service_id=service_id,
-        ),
-    )
-
-# # Initialising AI service
-if selectedService == Service.OpenAI:
-    execution_settings = OpenAIChatPromptExecutionSettings(
-        service_id=service_id,
-        ai_model_id="gpt-3.5-turbo",
-        max_tokens=2000,
-        temperature=0.7,
-    )
-elif selectedService == Service.AzureOpenAI:
-    execution_settings = AzureChatPromptExecutionSettings(
-        service_id=service_id,
-        ai_model_id="gpt4",
-        max_tokens=500,
-        temperature=0.7,
-        # top_p=0,
-        # frequency_penalty=0,
-        # presence_penalty=0,
-    )
+# AuthorRole,
+# ImageContent,
+# FinishReason
+from semantic_kernel.functions import (
+    KernelArguments,
+)
+from semantic_kernel.prompt_template import InputVariable, PromptTemplateConfig
 
 
 # Ensure that this top-level function is marked with 'async'
 async def main():
+
+    # Create a service instance
+    service_settings = ServiceSettings.create()
+
+    # Select a service to use for this notebook (available services: OpenAI, AzureOpenAI, HuggingFace)
+    selectedService = (
+        Service.AzureOpenAI
+        if service_settings.global_llm_service is None
+        else Service(service_settings.global_llm_service.lower())
+    )
+    print(f"Using service type: {selectedService}")
+
+    # Initialise Kernel
+    kernel = Kernel()
+
+    service_id = None
+    # service_id = "AzureOpenAI"  # "default"
+    if selectedService == Service.OpenAI:
+        from semantic_kernel.connectors.ai.open_ai import OpenAIChatCompletion
+
+        service_id = "default"
+        kernel.add_service(
+            OpenAIChatCompletion(
+                service_id=service_id,
+            ),
+        )
+    elif selectedService == Service.AzureOpenAI:
+        from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
+
+        service_id = "default"
+        kernel.add_service(
+            AzureChatCompletion(
+                service_id=service_id,
+            ),
+        )
+
+    # # Initialising AI service
+    if selectedService == Service.OpenAI:
+        execution_settings = OpenAIChatPromptExecutionSettings(
+            service_id=service_id,
+            ai_model_id="gpt-3.5-turbo",
+            max_tokens=2000,
+            temperature=0.7,
+        )
+    elif selectedService == Service.AzureOpenAI:
+        execution_settings = AzureChatPromptExecutionSettings(
+            service_id=service_id,
+            ai_model_id="gpt4",
+            max_tokens=500,
+            temperature=0.7,
+            # top_p=0,
+            # frequency_penalty=0,
+            # presence_penalty=0,
+        )
+
     # Create a chat history volatile instance
     chat_history = ChatHistory()
     chat_history.add_system_message(
