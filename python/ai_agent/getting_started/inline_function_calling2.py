@@ -110,6 +110,7 @@ summarize = kernel.add_function(  # loading semantic plugin
     function_name="summarizeFunc",
     plugin_name="summarizePlugin",
     prompt_template_config=prompt_template_config,
+    fully_qualified_name="summarizePlugin-summarizeFunc",  # plugin_name-function_name
 )
 
 

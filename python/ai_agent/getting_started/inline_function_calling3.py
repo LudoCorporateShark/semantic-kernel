@@ -66,7 +66,7 @@ tldr_function = (
         prompt_template_config=prompt_template_config,
         return_plugin=False,  # switch between plugin (T) and function (F)
         description="TLDR too long; didn't read",
-        fully_qualified_name="TLDR_Function",
+        fully_qualified_name="tldrPlugin-tldrFunction",  # plugin_name-function_name
     )
 )
 
