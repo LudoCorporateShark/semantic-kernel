@@ -1,19 +1,5 @@
 import sys
 
-##
-sys.path.insert(0, r"\\cd-bl1c-fs-01.customer.cddom.com\IT\Python\system")
-import cleardata_email
-import cleardata_error_log
-import smtplib
-import mimetypes
-from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
-from email.mime.text import MIMEText
-from email.encoders import encode_base64
-from email.mime.application import MIMEApplication
-import cleardata_multifile
-
-##
 # Define the grandparent directory path
 grandparent_dir = r"D:\\CodeBase Docs\\New folder\\semantic-kernel\\python"
 # Append the grandparent directory to the Python path
@@ -119,14 +105,14 @@ class EmailPlugin:
         input: Annotated[str, "the name of the person"],
     ):
         email = ""
-        if input == "Ludovic":
-            email = "ludovictw@cleardata.co.uk"
+        if input == "Jon":
+            email = "emailjon@email.com"
         elif input == "admin":
-            email = "ltwansi@cleardatagroup.uk"
-        elif input == "ludo":
-            email = "ludovictw@robocloud.co.uk"
+            email = "emailadmin@email.com"
+        elif input == "Joanne":
+            email = "emailjoanne@email.com"
         else:
-            email = "ludovictw@cleardata.co.uk"
+            email = "email@email.com"
         return email
 
 
