@@ -1,6 +1,7 @@
 {
   "prettier.enable": true,
   "css.lint.validProperties": ["composes"],
+  "editor.defaultFormatter": "ms-dotnettools.csharp",
   "editor.formatOnType": true,
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
@@ -16,6 +17,7 @@
   "python.formatting.autopep8Args": ["--max-line-length=120"],
   "notebook.output.textLineLimit": 500,
   "python.analysis.extraPaths": ["./python/src"],
+
   "javascript.updateImportsOnFileMove.enabled": "always",
   "search.exclude": {
     "**/node_modules": true,
@@ -63,32 +65,5 @@
     "**/CVS": true,
     "**/.DS_Store": true,
     "**/Thumbs.db": true
-  },
-  "cSpell.words": ["Partitioner", "Prompty", "SKEXP"],
-  "[java]": {
-    "editor.formatOnSave": false,
-    "editor.tabSize": 4,
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "never"
-    }
-  },
-  "emeraldwalk.runonsave": {
-    "commands": [
-      {
-        "match": "\\.java$",
-        "cmd": "java -Xmx128m -jar ${workspaceFolder}/java/utilities/google-java-format-1.17.0-all-deps.jar --replace --aosp ${file}"
-      }
-    ]
-  },
-  "java.debug.settings.onBuildFailureProceed": true,
-  "java.compile.nullAnalysis.mode": "disabled",
-  "dotnet.defaultSolution": "dotnet\\SK-dotnet.sln",
-  "python.testing.pytestArgs": ["python/tests"],
-  "python.testing.unittestEnabled": false,
-  "python.testing.pytestEnabled": true,
-  "azureFunctions.deploySubpath": "dotnet\\samples\\Demos\\CreateChatGptPlugin\\MathPlugin\\azure-function/bin/Release/net8.0/publish",
-  "azureFunctions.projectLanguage": "C#",
-  "azureFunctions.projectRuntime": "~4",
-  "debug.internalConsoleOptions": "neverOpen",
-  "azureFunctions.preDeployTask": "publish (functions)"
+  }
 }

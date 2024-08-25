@@ -1,6 +1,9 @@
 {
   "version": "2.0.0",
   "tasks": [
+    // *****************************
+    // Contributing (dotnet) - Setup
+    // *****************************
     {
       "label": "setup (contributing-R#)",
       "detail": "",
@@ -24,17 +27,17 @@
       "command": "dotnet",
       "type": "process",
       "args": [
-        "tool",
-        "install",
-        "JetBrains.ReSharper.GlobalTools",
-        "--global"
+        "watch",
+        "run",
+        "--project",
+        "${workspaceFolder}/samples/dotnet-kernel-syntax-examples/KernelSyntaxExamples.csproj"
       ],
-      "options": {
-        "cwd": "${workspaceFolder}/dotnet"
-      }
+      "problemMatcher": "$msCompile",
+      "group": "build"
     },
     {
-      "label": "format-check (contributing-R#)",
+      // r# inspect - dotnet jb inspectcode -o="inspectcode.log" --no-build -s=".\SK-dotnet.sln.DotSettings" -f=Text ".\SK-dotnet.sln"
+      "label": "R# check",
       "command": "dotnet",
       "type": "process",
       "group": "build",
@@ -52,7 +55,8 @@
       }
     },
     {
-      "label": "format (contributing-R#)",
+      // r# cleanup - dotnet jb cleanupcode --no-build -p="Built-in: Reformat Code" -s=SK-dotnet.sln.DotSettings SK-dotnet.sln
+      "label": "R# cleanup",
       "command": "dotnet",
       "type": "process",
       "group": "build",
@@ -81,52 +85,11 @@
       ],
       "dependsOrder": "sequence"
     },
+    // *****************************
+    // Contributing (python) - Setup
+    // *****************************
     {
-      "label": "setup (contributing-python)",
-      "detail": "",
-      "group": "build",
-      "dependsOn": ["install poetry", "install python packages"],
-      "dependsOrder": "sequence"
-    },
-    {
-      "label": "install poetry",
-      "detail": "Install poetry",
-      "command": "pip3",
-      "type": "shell",
-      "args": ["install", "poetry"],
-      "options": {
-        "cwd": "${workspaceFolder}/python"
-      }
-    },
-    {
-      "label": "install python packages",
-      "detail": "Install python packages",
-      "command": "poetry",
-      "type": "shell",
-      "args": ["install"],
-      "options": {
-        "cwd": "${workspaceFolder}/python"
-      }
-    },
-    {
-      "label": "validate (contributing-python)",
-      "command": "poetry",
-      "type": "shell",
-      "group": "build",
-      "args": [
-        "run",
-        "pre-commit",
-        "run",
-        "-c",
-        ".conf/.pre-commit-config.yaml",
-        "-a"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}/python"
-      }
-    },
-    {
-      "label": "build (Semantic-Kernel)",
+      "label": "Build - Semantic-Kernel",
       "command": "dotnet",
       "type": "process",
       "args": [
@@ -143,201 +106,31 @@
         "group": "PR-Validate"
       }
     },
+    // Test
     {
-      "label": "test (Semantic-Kernel)",
+      "label": "Test - Semantic-Kernel",
       "command": "dotnet",
       "type": "process",
-      "args": ["test", "SemanticKernel.UnitTests.csproj"],
+      "args": [
+        "test",
+        "${workspaceFolder}/dotnet/src/SemanticKernel.Test/SemanticKernel.Test.csproj"
+      ],
       "problemMatcher": "$msCompile",
       "group": "test",
       "presentation": {
         "reveal": "always",
         "panel": "shared",
         "group": "PR-Validate"
-      },
-      "options": {
-        "cwd": "${workspaceFolder}/dotnet/src/SemanticKernel.UnitTests/"
       }
     },
     {
-      "label": "test (Semantic-Kernel (Code Coverage))",
-      "command": "dotnet",
-      "type": "process",
-      "args": [
-        "test",
-        "--results-directory",
-        "${workspaceFolder}/dotnet/TestResults/",
-        "--collect",
-        "XPlat Code Coverage;Format=lcov",
-        "--filter",
-        "${input:filter}",
-        "SemanticKernel.UnitTests.csproj"
-      ],
-      "problemMatcher": "$msCompile",
-      "group": "test",
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared"
-      },
-      "options": {
-        "cwd": "${workspaceFolder}/dotnet/src/SemanticKernel.UnitTests/"
-      }
-    },
-    {
-      "label": "test (Extensions (Code Coverage))",
-      "command": "dotnet",
-      "type": "process",
-      "args": [
-        "test",
-        "--results-directory",
-        "${workspaceFolder}/dotnet/TestResults/",
-        "--collect",
-        "XPlat Code Coverage;Format=lcov",
-        "--filter",
-        "${input:filter}",
-        "Extensions.UnitTests.csproj"
-      ],
-      "problemMatcher": "$msCompile",
-      "group": "test",
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared"
-      },
-      "options": {
-        "cwd": "${workspaceFolder}/dotnet/src/Extensions/Extensions.UnitTests/"
-      }
-    },
-    {
-      "label": "test (ALL (Code Coverage))",
-      "command": "dotnet",
-      "type": "process",
-      "args": [
-        "test",
-        "--results-directory",
-        "${workspaceFolder}/dotnet/TestResults/",
-        "--collect",
-        "XPlat Code Coverage;Format=lcov",
-        "--filter",
-        "${input:filter}"
-      ],
-      "problemMatcher": "$msCompile",
-      "group": "test",
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared"
-      },
-      "options": {
-        "cwd": "${workspaceFolder}/dotnet/"
-      }
-    },
-    {
-      "label": "test (Semantic-Kernel Integration (Code Coverage))",
-      "command": "dotnet",
-      "type": "process",
-      "args": [
-        "test",
-        "--results-directory",
-        "${workspaceFolder}/dotnet/TestResults/",
-        "--collect",
-        "XPlat Code Coverage;Format=lcov",
-        "--filter",
-        "${input:filter}",
-        "IntegrationTests.csproj"
-      ],
-      "problemMatcher": "$msCompile",
-      "group": "test",
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared"
-      },
-      "options": {
-        "cwd": "${workspaceFolder}/dotnet/src/IntegrationTests/"
-      }
-    },
-    {
-      "label": "test (Semantic-Kernel-Python)",
-      "command": "poetry",
-      "type": "shell",
-      "args": ["run", "pytest", "tests/unit"],
-      "problemMatcher": "$msCompile",
-      "group": "test",
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared",
-        "group": "PR-Validate"
-      },
-      "options": {
-        "cwd": "${workspaceFolder}/python"
-      }
-    },
-    {
-      "label": "test (Semantic-Kernel-Python Integration)",
-      "command": "poetry",
-      "type": "shell",
-      "args": ["run", "pytest", "tests/integration", "-k", "${input:filter}"],
-      "problemMatcher": "$msCompile",
-      "group": "test",
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared",
-        "group": "PR-Validate"
-      },
-      "options": {
-        "cwd": "${workspaceFolder}/python"
-      }
-    },
-    {
-      "label": "test (Semantic-Kernel-Python ALL)",
-      "command": "poetry",
-      "type": "shell",
-      "args": ["run", "pytest", "tests", "-k", "${input:filter}"],
-      "problemMatcher": "$msCompile",
-      "group": "test",
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared",
-        "group": "PR-Validate"
-      },
-      "options": {
-        "cwd": "${workspaceFolder}/python"
-      }
-    },
-    {
-      "label": "build (Concepts)",
-      "command": "dotnet",
-      "type": "process",
-      "args": [
-        "build",
-        "${workspaceFolder}/dotnet/samples/Concepts/Concepts.csproj",
-        "/property:GenerateFullPaths=true",
-        "/consoleloggerparameters:NoSummary",
-        "/property:DebugType=portable"
-      ],
-      "problemMatcher": "$msCompile",
-      "group": "build"
-    },
-    {
-      "label": "watch (Concepts)",
-      "command": "dotnet",
-      "type": "process",
-      "args": [
-        "watch",
-        "run",
-        "--project",
-        "${workspaceFolder}/dotnet/samples/Concepts/Concepts.csproj"
-      ],
-      "problemMatcher": "$msCompile",
-      "group": "build"
-    },
-    {
-      "label": "run (Concepts)",
+      "label": "Run - Kernel-Demo",
       "command": "dotnet",
       "type": "process",
       "args": [
         "run",
         "--project",
-        "${workspaceFolder}/dotnet/samples/Concepts/Concepts.csproj",
-        "${input:filter}"
+        "${workspaceFolder}/samples/dotnet-kernel-syntax-examples/KernelSyntaxExamples.csproj"
       ],
       "problemMatcher": "$msCompile",
       "group": "test",
@@ -345,91 +138,40 @@
         "reveal": "always",
         "panel": "shared",
         "group": "PR-Validate"
-      }
-    },
-    {
-      "label": "clean (functions)",
-      "command": "dotnet",
-      "args": [
-        "clean",
-        "/property:GenerateFullPaths=true",
-        "/consoleloggerparameters:NoSummary"
-      ],
-      "type": "process",
-      "problemMatcher": "$msCompile",
-      "options": {
-        "cwd": "${workspaceFolder}/dotnet\\samples\\Demos\\CreateChatGptPlugin\\MathPlugin\\azure-function"
-      }
-    },
-    {
-      "label": "build (functions)",
-      "command": "dotnet",
-      "args": [
-        "build",
-        "/property:GenerateFullPaths=true",
-        "/consoleloggerparameters:NoSummary"
-      ],
-      "type": "process",
-      "dependsOn": "clean (functions)",
-      "group": {
-        "kind": "build",
-        "isDefault": true
       },
-      "problemMatcher": "$msCompile",
       "options": {
-        "cwd": "${workspaceFolder}/dotnet\\samples\\Demos\\CreateChatGptPlugin\\MathPlugin\\azure-function"
+        "cwd": "${workspaceFolder}/python"
       }
     },
     {
-      "label": "clean release (functions)",
-      "command": "dotnet",
-      "args": [
-        "clean",
-        "--configuration",
-        "Release",
-        "/property:GenerateFullPaths=true",
-        "/consoleloggerparameters:NoSummary"
-      ],
-      "type": "process",
-      "problemMatcher": "$msCompile",
+      "label": "Run - Starter API Azure Function",
+      "command": "func",
+      "type": "shell",
+      "args": ["start", "--csharp"],
+      "group": "test",
       "options": {
-        "cwd": "${workspaceFolder}/dotnet\\samples\\Demos\\CreateChatGptPlugin\\MathPlugin\\azure-function"
-      }
-    },
-    {
-      "label": "publish (functions)",
-      "command": "dotnet",
-      "args": [
-        "publish",
-        "--configuration",
-        "Release",
-        "/property:GenerateFullPaths=true",
-        "/consoleloggerparameters:NoSummary"
-      ],
-      "type": "process",
-      "dependsOn": "clean release (functions)",
-      "problemMatcher": "$msCompile",
-      "options": {
-        "cwd": "${workspaceFolder}/dotnet\\samples\\Demos\\CreateChatGptPlugin\\MathPlugin\\azure-function"
-      }
-    },
-    {
-      "type": "func",
-      "dependsOn": "build (functions)",
-      "options": {
-        "cwd": "${workspaceFolder}/dotnet\\samples\\Demos\\CreateChatGptPlugin\\MathPlugin\\azure-function/bin/Debug/net8.0"
+        "cwd": "${workspaceFolder}/samples/starter-api-azure-function"
       },
-      "command": "host start",
-      "isBackground": true,
-      "problemMatcher": "$func-dotnet-watch"
-    }
-  ],
-  "inputs": [
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "group": "Run-Samples"
+      }
+    },
     {
-      "id": "filter",
-      "type": "promptString",
-      "default": "",
-      "description": "Enter a filter to pass as argument or filter"
+      "label": "Run - Starter Chat WebApp React",
+      "command": "yarn",
+      "type": "shell",
+      "args": ["start"],
+      "group": "test",
+      "options": {
+        "cwd": "${workspaceFolder}/samples/starter-chat-webapp-react"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "group": "Run-Samples"
+      }
     }
   ]
 }
