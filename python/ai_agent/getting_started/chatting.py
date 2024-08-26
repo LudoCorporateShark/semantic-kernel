@@ -21,7 +21,6 @@ from semantic_kernel.contents import (
     # FinishReason
 )
 
-settle
 from semantic_kernel.functions import (
     KernelArguments,
     # FunctionResult,
@@ -108,7 +107,7 @@ async def main():
     # registering the semantic function
     prompt_template_config = PromptTemplateConfig(  # semantic plugin configuration
         template=prompt,  # chat prompt
-        name="data-analysis-chat",  # chat name
+        name="chat",  # chat name
         template_format="semantic-kernel",  # 'jinja', 'handlebars'
         input_variables=[
             InputVariable(name="input", description="The user input", is_required=True),
@@ -121,12 +120,12 @@ async def main():
     )
 
     chat_bot_function = kernel.add_function(  # loading semantic plugin
-        function_name="dataAnalysisChatFunc",
-        plugin_name="dataAnalysisChatPlugin",
+        function_name="ChatFunc",
+        plugin_name="ChatPlugin",
         prompt_template_config=prompt_template_config,
         return_plugin=False,  # switch between plugin (T) and function (F)
         description="Example of chatbot function",
-        # fully_qualified_name="dataAnalysisChatPlugin-dataAnalysisChatFunc",  # plugin_name-function_name
+        # fully_qualified_name="ChatPlugin-ChatFunc",  # plugin_name-function_name
     )
 
     # Initialising the Kernel argument

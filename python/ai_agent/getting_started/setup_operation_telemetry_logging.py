@@ -26,10 +26,7 @@ from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from opentelemetry.semconv.resource import ResourceAttributes
 from opentelemetry.trace import set_tracer_provider
 
-from samples.demos.telemetry_with_application_insights.repo_utils import get_sample_plugin_path
 from samples.demos.telemetry_with_application_insights.telemetry_sample_settings import TelemetrySampleSettings
-# from semantic_kernel.connectors.ai.google.google_ai.services.google_ai_chat_completion import GoogleAIChatCompletion
-# from semantic_kernel.connectors.ai.open_ai.services.open_ai_chat_completion import OpenAIChatCompletion
 from semantic_kernel.connectors.ai.open_ai.services.azure_chat_completion import AzureChatCompletion
 from semantic_kernel.connectors.ai.prompt_execution_settings import PromptExecutionSettings
 from semantic_kernel.functions.kernel_arguments import KernelArguments
@@ -146,28 +143,25 @@ async def run_service(kernel: Kernel, plugin_name: str, service_id: str):
 async def main():
     # Initialize the kernel
     kernel = Kernel()
-    kernel.add_service(AzureChatCompletion())
-    # kernel.add_service(GoogleAIChatCompletion(service_id="google_ai"))
+    kernel.add_service(AzureChatCompletion(service_id="default"))
+
+    # note: using plugins from the samples folder
+    SAMPLE_PLUGIN_FOLDER = (
+        r"D:\\CodeBase Docs\\New folder\\semantic-kernel\\prompt_template_samples"
+    )
 
     # Add the sample plugin
-    if (sample_plugin_path := get_sample_plugin_path()) is None:
-        raise FileNotFoundError("Sample plugin path not found.")
-    print(f"Sample plugin path: {sample_plugin_path}")
     plugin = kernel.add_plugin(
         plugin_name="WriterPlugin",
-        parent_directory=sample_plugin_path,
+        parent_directory=SAMPLE_PLUGIN_FOLDER,
     )
 
     tracer = trace.get_tracer(__name__)
     with tracer.start_as_current_span("main") as current_span:
         print(f"Trace ID: {current_span.get_span_context().trace_id}")
 
-        # Run the OpenAI service
-        await run_service(kernel, plugin_name=plugin.name, service_id="open_ai")
-
-        # Run the GoogleAI service
-        await run_service(kernel, plugin_name=plugin.name, service_id="google_ai")
-
+        # Run the default AI service
+        await run_service(kernel, plugin_name=plugin.name, service_id="default")
 
 if __name__ == "__main__":
     asyncio.run(main())

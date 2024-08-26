@@ -328,7 +328,6 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
-*.venv/*
 
 # Cake - Uncomment if you are using it
 # tools/**
@@ -451,5 +450,4 @@ global.json
 _site
 
 */tests/*
-python/ai_agent/getting_started/sequential_planner_custom_email.py
-python/ai_agent/getting_started/embedding.py
+.venv/

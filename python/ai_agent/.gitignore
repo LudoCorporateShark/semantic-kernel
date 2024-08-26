@@ -1,1 +1,3 @@
 *.txt
+/getting_started/stepwise_planner_custom_email.py
+/getting_started/chatting.py
