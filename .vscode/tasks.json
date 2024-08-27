@@ -8,7 +8,10 @@
       "label": "setup (contributing-R#)",
       "detail": "",
       "group": "build",
-      "dependsOn": ["new tool-manifest", "# Setup"],
+      "dependsOn": [
+        "new tool-manifest",
+        "# Setup"
+      ],
       "dependsOrder": "sequence"
     },
     {
@@ -16,7 +19,10 @@
       "detail": "Install ReSharper Global Tools",
       "command": "dotnet",
       "type": "process",
-      "args": ["new", "tool-manifest"],
+      "args": [
+        "new",
+        "tool-manifest"
+      ],
       "options": {
         "cwd": "${workspaceFolder}/dotnet"
       }
@@ -85,11 +91,20 @@
       ],
       "dependsOrder": "sequence"
     },
+<<<<<<< HEAD
     // *****************************
     // Contributing (python) - Setup
     // *****************************
     {
       "label": "Build - Semantic-Kernel",
+=======
+    // ***************
+    // Kernel (dotnet)
+    // ***************
+    // Build
+    {
+      "label": "build (Semantic-Kernel)",
+>>>>>>> 21507472dbfb2f82c4cee14827624e2d14dc0b39
       "command": "dotnet",
       "type": "process",
       "args": [
@@ -113,7 +128,11 @@
       "type": "process",
       "args": [
         "test",
+<<<<<<< HEAD
         "${workspaceFolder}/dotnet/src/SemanticKernel.Test/SemanticKernel.Test.csproj"
+=======
+        "SemanticKernel.UnitTests.csproj"
+>>>>>>> 21507472dbfb2f82c4cee14827624e2d14dc0b39
       ],
       "problemMatcher": "$msCompile",
       "group": "test",
@@ -124,7 +143,137 @@
       }
     },
     {
+<<<<<<< HEAD
       "label": "Run - Kernel-Demo",
+=======
+      "label": "test (Semantic-Kernel (Code Coverage))",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "test",
+        "--results-directory",
+        "${workspaceFolder}/dotnet/TestResults/",
+        "--collect",
+        "XPlat Code Coverage;Format=lcov",
+        "--filter",
+        "${input:filter}",
+        "SemanticKernel.UnitTests.csproj"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/dotnet/src/SemanticKernel.UnitTests/"
+      }
+    },
+    {
+      "label": "test (Extensions (Code Coverage))",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "test",
+        "--results-directory",
+        "${workspaceFolder}/dotnet/TestResults/",
+        "--collect",
+        "XPlat Code Coverage;Format=lcov",
+        "--filter",
+        "${input:filter}",
+        "Extensions.UnitTests.csproj"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/dotnet/src/Extensions/Extensions.UnitTests/"
+      }
+    },
+    {
+      "label": "test (ALL (Code Coverage))",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "test",
+        "--results-directory",
+        "${workspaceFolder}/dotnet/TestResults/",
+        "--collect",
+        "XPlat Code Coverage;Format=lcov",
+        "--filter",
+        "${input:filter}"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/dotnet/"
+      }
+    },
+    {
+      "label": "test (Semantic-Kernel Integration (Code Coverage))",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "test",
+        "--results-directory",
+        "${workspaceFolder}/dotnet/TestResults/",
+        "--collect",
+        "XPlat Code Coverage;Format=lcov",
+        "--filter",
+        "${input:filter}",
+        "IntegrationTests.csproj"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/dotnet/src/IntegrationTests/"
+      }
+    },
+    // ****************
+    // Samples (dotnet)
+    // ****************
+    // Kernel Syntax Examples
+    {
+      "label": "build (Concepts)",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/dotnet/samples/Concepts/Concepts.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary",
+        "/property:DebugType=portable"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": "build"
+    },
+    {
+      "label": "watch (Concepts)",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "watch",
+        "run",
+        "--project",
+        "${workspaceFolder}/dotnet/samples/Concepts/Concepts.csproj"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": "build"
+    },
+    {
+      "label": "run (Concepts)",
+>>>>>>> 21507472dbfb2f82c4cee14827624e2d14dc0b39
       "command": "dotnet",
       "type": "process",
       "args": [
